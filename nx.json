@@ -10,7 +10,7 @@
       "!{projectRoot}/**/?(*.)+(spec|test).[jt]s?(x)?(.snap)",
       "!{projectRoot}/tsconfig.spec.json",
       "!{projectRoot}/jest.config.[jt]s",
-      "!{projectRoot}/src/test-setup.[jt]s",
+      "!{projectRoot}/**/test-setup.[jt]s",
       "!{projectRoot}/test-setup.[jt]s"
     ],
     "sharedGlobals": []
@@ -18,7 +18,7 @@
   "nxCloudAccessToken": "MDA2MWY0NWYtZjZhZi00NTRiLTkxOTktZmEyMWYyNzQ3NWJjfHJlYWQtd3JpdGU=",
   "targetDefaults": {
     "@nx/js:tsc": {
-      "cache": true,
+      "cache": false,
       "dependsOn": ["^build"],
       "inputs": ["production", "^production"]
     }

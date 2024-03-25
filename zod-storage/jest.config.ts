@@ -9,5 +9,5 @@ export default <Config>{
   },
   moduleFileExtensions: ['ts', 'js', 'html'],
   coverageDirectory: '../coverage/types.ts',
-  setupFiles: ['<rootDir>/src/tests/test-setup.ts'],
+  setupFiles: ['<rootDir>/test-setup.ts'],
 };
