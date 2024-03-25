@@ -19,7 +19,8 @@ describe('ZodStorageBuilder', () => {
 			name: z.string()
 		});
 		// Act
-		const builder = new ZodStorageBuilder(schema, undefined, localStorage);
+		const builder = new ZodStorageBuilder(schema);
+		builder.withProvider(localStorage);
 		// Assert
 		expect(builder).toBeDefined();
 	});
@@ -30,9 +31,11 @@ describe('ZodStorageBuilder', () => {
 			name: z.string()
 		});
 		// Act
-		const builder = new ZodStorageBuilder(schema, {
-			name: 'NAME_KEY'
-		}, localStorage);
+		const builder = new ZodStorageBuilder(schema)
+			.withKeys({
+				name: 'NAME_KEY'
+			})
+			.withProvider(localStorage);
 		// Assert
 		expect(builder).toBeDefined();
 	});
@@ -43,9 +46,12 @@ describe('ZodStorageBuilder', () => {
 			name: z.string()
 		});
 		// Act
-		const builder = new ZodStorageBuilder(schema, {
-			name: 'NAME_KEY'
-		}, localStorage, new JSONStringifier());
+		const builder = new ZodStorageBuilder(schema)
+			.withKeys({
+				name: 'NAME_KEY'
+			})
+			.withProvider(localStorage)
+			.withStringifier(new JSONStringifier());
 		// Assert
 		expect(builder).toBeDefined();
 	});

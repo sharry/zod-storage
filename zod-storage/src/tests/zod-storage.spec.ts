@@ -72,6 +72,18 @@ describe('ZodStorage instance', () => {
 		expect(zodStorage[key].get()).toBeNull();
 	});
 
+	it.each<[(keyof Schema), Schema[keyof Schema]]>([
+		['name', false],
+		['age', false],
+		['isActive', "false"],
+		['createdAt', false],
+		['theme', false],
+		['profile', false],
+		['tags', false],
+	])(`should throw if trying to set an invalid %s`, (key, val) => {
+		expect(() => zodStorage.theme.set(val as never)).toThrow();
+	});
+
 	it('should clear all items', () => {
 		zodStorage.name.set('John');
 		zodStorage.age.set(30);
@@ -106,9 +118,11 @@ describe('ZodStorage instance', () => {
 		const customSchema = z.object({
 			name: z.string()
 		});
-		const customZodStorage = new ZodStorageBuilder(customSchema, {
-			name: 'CUSTOM_KEY_FOR_NAME'
-		}).build();
+		const customZodStorage = new ZodStorageBuilder(customSchema)
+			.withKeys({
+				name: 'CUSTOM_KEY_FOR_NAME',
+			})
+			.build();
 		customZodStorage.name.set('John');
 		expect(customZodStorage.name.get()).toBe('John');
 		expect(localStorage.getItem('CUSTOM_KEY_FOR_NAME')).toBe(JSON.stringify('John'));
@@ -118,9 +132,11 @@ describe('ZodStorage instance', () => {
 		const customSchema = z.object({
 			name: z.string()
 		});
-		const customZodStorage = new ZodStorageBuilder(customSchema, {
-			name: 'CUSTOM_KEY_FOR_NAME'
-		}).build();
+		const customZodStorage = new ZodStorageBuilder(customSchema)
+			.withKeys({
+				name: 'CUSTOM_KEY_FOR_NAME',
+			})
+			.build();
 		customZodStorage.name.set('John');
 		customZodStorage.name.remove();
 		expect(customZodStorage.name.get()).toBeNull();
@@ -131,9 +147,11 @@ describe('ZodStorage instance', () => {
 		const customSchema = z.object({
 			name: z.string()
 		});
-		const customZodStorage = new ZodStorageBuilder(customSchema, {
-			name: 'CUSTOM_KEY_FOR_NAME'
-		}).build();
+		const customZodStorage = new ZodStorageBuilder(customSchema)
+			.withKeys({
+				name: 'CUSTOM_KEY_FOR_NAME',
+			})
+			.build();
 		customZodStorage.name.set('John');
 		customZodStorage.clear();
 		expect(customZodStorage.name.get()).toBeNull();

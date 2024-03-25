@@ -15,7 +15,7 @@
     "skipDefaultLibCheck": true,
     "baseUrl": ".",
     "paths": {
-      "@sharry.co/zod-storage": ["zod-storage/src/index.ts"]
+      "zod-storage": ["zod-storage/src/index.ts"]
     }
   },
   "exclude": ["node_modules", "tmp"]
