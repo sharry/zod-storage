@@ -1,0 +1,15 @@
+{
+  "name": "@sharry.co/zod-storage",
+  "version": "0.0.1",
+  "dependencies": {
+    "tslib": "^2.3.0",
+    "zod": "^3.22.4"
+  },
+  "type": "commonjs",
+  "main": "./src/index.js",
+  "typings": "./src/index.d.ts",
+  "private": true,
+  "devDependencies": {
+    "jest-localstorage-mock": "^2.4.26"
+  }
+}

@@ -1,0 +1,19 @@
+{
+  "name": "zod-storage",
+  "$schema": "../node_modules/nx/schemas/project-schema.json",
+  "sourceRoot": "zod-storage/src",
+  "projectType": "library",
+  "targets": {
+    "build": {
+      "executor": "@nx/js:tsc",
+      "outputs": ["{options.outputPath}"],
+      "options": {
+        "outputPath": "dist/zod-storage",
+        "main": "zod-storage/src/index.ts",
+        "tsConfig": "zod-storage/tsconfig.lib.json",
+        "assets": ["zod-storage/*.md"]
+      }
+    }
+  },
+  "tags": []
+}
