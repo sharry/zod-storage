@@ -43,14 +43,14 @@ import { ZodStorageBuilder } from 'zod-storage';
 import { z } from 'zod';
 
 const schema = z.object({
-    theme: z.enum(['light', 'dark']),
-    name: z.string()
+	theme: z.enum(['light', 'dark']),
+	name: z.string()
 });
 
 const storage = new ZodStorageBuilder(schema)
-    .withKeys({
-        theme: 'my_custom_key',
-    }).build();
+	.withKeys({
+		theme: 'my_custom_key',
+	}).build();
 ```
 ## Storage Types
 
@@ -60,9 +60,8 @@ The builder support any storage type that implements the `Storage` interface. By
 import { ZodStorageBuilder } from 'zod-storage';
 
 const storage = new ZodStorageBuilder(schema)
-    .withProvider(sessionStorage)
-    .build();
-//                                                       ^ insert your storage as third argument
+	.withProvider(sessionStorage)
+	.build();
 ```
 
 ## Stringifier
@@ -77,6 +76,6 @@ class MyCustomStringifier implements Stringifier {
 }
 
 const storage = new ZodStorageBuilder(schema)
-    .withStringifier(new MyCustomStringifier())
-    .build();
+	.withStringifier(new MyCustomStringifier())
+	.build();
 ```

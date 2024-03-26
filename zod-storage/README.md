@@ -62,7 +62,6 @@ import { ZodStorageBuilder } from 'zod-storage';
 const storage = new ZodStorageBuilder(schema)
     .withProvider(sessionStorage)
     .build();
-//                                                       ^ insert your storage as third argument
 ```
 
 ## Stringifier
