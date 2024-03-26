@@ -26,7 +26,7 @@ storage.theme.set('light');
 storage.theme.set('sepia'); // Argument of type '"sepia"' is not assignable to parameter of type '"light" | "dark"'
 
 const age = storage.age.get(); // age is number
-storage.age.set(19); // throws zod error
+storage.age.set(17); // throws zod error
 ```
 
 ## Features
