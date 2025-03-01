@@ -14,7 +14,7 @@
     "skipDefaultLibCheck": true,
     "baseUrl": ".",
     "paths": {
-      "zod-builder": ["src/index.ts"]
+      "zod-storage": ["src/index.ts"]
     }
   },
   "files": [],

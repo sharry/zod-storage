@@ -79,3 +79,14 @@ const storage = new ZodStorageBuilder(schema)
 	.withStringifier(new MyCustomStringifier())
 	.build();
 ```
+
+## Namespaces
+You can also prepend a namespace to the keys, useful for, example, storing per-user data:
+```ts
+import { ZodStorageBuilder } from 'zod-storage';
+
+const storage = new ZodStorageBuilder(schema)
+	.withProvider(sessionStorage)
+	.withNamespace(`${user.id}->settings->`)
+	.build();
+```
