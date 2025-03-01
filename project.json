@@ -1,5 +1,5 @@
 {
-  "name": "zod-builder",
+  "name": "zod-storage",
   "$schema": "node_modules/nx/schemas/project-schema.json",
   "sourceRoot": "src",
   "projectType": "library",
@@ -8,7 +8,7 @@
       "executor": "@nx/js:tsc",
       "outputs": ["{options.outputPath}"],
       "options": {
-        "outputPath": "dist/zod-builder",
+        "outputPath": "dist/zod-storage",
         "main": "./src/index.ts",
         "tsConfig": "./tsconfig.lib.json",
         "assets": ["*.md"]
@@ -22,7 +22,7 @@
       "outputs": ["{options.reportsDirectory}"],
       "options": {
         "jestConfig": "./jest.config.ts",
-        "reportsDirectory": "coverage/zod-builder"
+        "reportsDirectory": "coverage/zod-storage"
       }
     }
   },

@@ -1,6 +1,7 @@
 import { z } from 'zod';
 import { ZodStorageBuilder } from '../lib/zod-storage-builder';
 import { JSONStringifier } from '../lib/json-stringifier';
+import { ZodStorageErrors } from '../lib/ZodStorageError';
 
 describe('ZodStorageBuilder', () => {
 
@@ -61,7 +62,8 @@ describe('ZodStorageBuilder', () => {
 		const schema = z.object({});
 		const builder = new ZodStorageBuilder(schema);
 		// Act & Assert
-		expect(() => builder.build()).toThrow('ZodStorageBuilder not initialized');
+		expect(() => builder.build())
+			.toThrow(ZodStorageErrors.builderNotInitialized);
 	});
 
 	it('should build a ZodStorage with the correct shape', () => {
