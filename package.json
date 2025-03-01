@@ -1,6 +1,6 @@
 {
-  "name": "@zod-builder/source",
-  "version": "0.0.3",
+  "name": "@zod-storage/source",
+  "version": "0.0.4",
   "license": "MIT",
   "scripts": {
     "build": "nx build",
