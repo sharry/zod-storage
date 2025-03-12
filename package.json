@@ -1,5 +1,5 @@
 {
-  "name": "@zod-builder/source",
+  "name": "@zod-storage/source",
   "version": "0.0.3",
   "license": "MIT",
   "scripts": {

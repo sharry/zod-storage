@@ -1,30 +1,47 @@
 import { z } from 'zod';
 import { Stringifier, ZodStorage, ZodStorageItem } from './types';
 import { JSONStringifier } from './json-stringifier';
+import { ZodStorageError, ZodStorageErrors } from './ZodStorageError';
 
 export class ZodStorageBuilder<T extends z.ZodRawShape> {
+
 	private items?: ZodStorage<z.infer<z.ZodObject<T>>>;
 	private keys?: Partial<Record<keyof T, string>> = undefined;
 	private provider: Storage = localStorage;
 	private stringifier: Stringifier = new JSONStringifier();
+	private namespace: string = "";
+
 	constructor(private storageSchema: z.ZodObject<T>) {}
+
 	public withKeys(keys: Partial<Record<keyof T, string>>): ZodStorageBuilder<T> {
 		this.keys = keys;
 		return this;
 	}
+
 	public withProvider(provider: Storage): ZodStorageBuilder<T> {
 		this.provider = provider;
 		return this;
 	}
+
 	public withStringifier(stringifier: Stringifier): ZodStorageBuilder<T> {
 		this.stringifier = stringifier;
+		return this;
+	}
+
+	public withNamespace(namespace: string): ZodStorageBuilder<T> {
+		const { success } = z.string().min(1)
+			.safeParse(namespace);
+		if (!success) {
+			throw new ZodStorageError(ZodStorageErrors.invalidNamespace);
+		}
+		this.namespace = namespace;
 		return this;
 	}
 
 	private configureItems() {
 		const entries = Object.entries(this.storageSchema.shape);
 		entries.flatMap(([shapeKey, itemSchema]) => {
-			const key = this.keys?.[shapeKey] ?? shapeKey;
+			const key = this.namespace + (this.keys?.[shapeKey] ?? shapeKey);
 			const item: ZodStorageItem<z.infer<typeof itemSchema>> = {
 				get: () => {
 					const value = this.provider.getItem(key);
@@ -60,6 +77,7 @@ export class ZodStorageBuilder<T extends z.ZodRawShape> {
 			};
 		});
 	}
+
 	private clear() {
 		if (!this.items) {
 			return;
@@ -69,14 +87,15 @@ export class ZodStorageBuilder<T extends z.ZodRawShape> {
 		});
 	}
 
-	build(): ZodStorage<z.infer<z.ZodObject<T>>> {
+	public build(): ZodStorage<z.infer<z.ZodObject<T>>> {
 		this.configureItems();
 		if (!this.items) {
-			throw new Error('ZodStorageBuilder not initialized');
+			throw new ZodStorageError(ZodStorageErrors.builderNotInitialized);
 		}
 		return Object.freeze({
 			...this.items,
 			clear: this.clear.bind(this)
 		});
 	}
+
 }
