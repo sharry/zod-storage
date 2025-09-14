@@ -2,6 +2,9 @@
   "name": "@zod-storage/source",
   "version": "0.0.4",
   "license": "MIT",
+  "publishConfig": {
+	"access": "public"
+  },
   "scripts": {
     "build": "nx build",
     "test": "nx test"
